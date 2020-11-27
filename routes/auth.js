@@ -43,9 +43,8 @@ router.post('/login', (req, res, next) => {
                     message: "Auth failed!"
                 })
             }
-            //Criar um token baseado nos dados que desejar -> nesse caso sao os dados de login
             const token = jwt.sign({ email: userData.email, userId: userData._id },
-                'secret_for_authentication', { expiresIn: "1h" })
+                process.env.AUTH_SECRET, { expiresIn: "1h" })
             res.status(200).json({
                 token: token,
                 expiresIn: 3600
