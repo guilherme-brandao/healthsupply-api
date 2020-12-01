@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const healthRouter = require('./routes/health');
 const authRouter = require('./routes/auth');
 const requestRouter = require('./routes/request');
+const checkAuth = require('./middleware/check-auth');
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
@@ -25,7 +26,7 @@ app.use(cors());
 app.use(logger('[:date[clf]] | ":method :url HTTP/:http-version" | STATUS: :status | CONTENT_LENGTH: :res[content-length] | RESPONSE_TIME: :response-time ms'));
 app.use(healthRouter)
 app.use("/auth", authRouter)
-app.use("/request", requestRouter)
+app.use("/request", checkAuth, requestRouter)
 
 app.use((req, res, next) => {
     res.status(404).send('<h1>Not Found!</h1>')
