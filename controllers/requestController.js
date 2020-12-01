@@ -1,17 +1,18 @@
 const mongoose = require('mongoose');
 const Utils = require('../utils/utils');
-const File = require("../models/file");
 const Request = require('../models/request');
+const moment = require('moment');
 
 exports.createRequest = async (req, res, next) => {
 
-    var attachments = req.files[i];
-    var request = req.body.request;
-    var requestJSON = JSON.parse(request);
+    var attachments = req.files;
+    var request = JSON.parse(req.body.request);
+    console.log(request)
+    console.log(typeof request)
 
     if (attachments && attachments.length > 0) {
-        let requestWithAttachments = await Utils.handleAttachments(requestJSON, attachments);
-        requestJSON = requestWithAttachments;
+        let requestWithAttachments = await Utils.handleAttachments(request, attachments);
+        var requestJSON = requestWithAttachments;
     }
 
     let requestSchema = new Request({
@@ -45,16 +46,9 @@ exports.getRequests = async (req, res, next) => {
     let selector = {}
     let query = selector
 
-    selector.tipo_ativo = "REQUEST"
-    if (req.query.status != ' ') selector.status = req.query.status
-    if (req.query.data != '') {
-        selector.data = {
-            $gte: moment(req.query.data),
-            $lte: moment(req.query.data).endOf('day')
-        }
-    }
+    selector.type = "REQUEST"
 
-    Solicitacao.find(query).sort({ $natural: -1 })
+    Request.find(query).sort({ $natural: -1 })
         .exec()
         .then(s => {
             if (s) {

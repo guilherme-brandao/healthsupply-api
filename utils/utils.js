@@ -1,3 +1,4 @@
+const File = require("../models/file");
 
 class Uteis {
 
@@ -8,7 +9,7 @@ class Uteis {
     }
 
     // Include the files in DB and in the request
-    static handleAttachments = async (request, attachments) => {
+    static async handleAttachments(request, attachments) {
 
         request.attachments = [];
         for (let i = 0; i < attachments.length; i++) {

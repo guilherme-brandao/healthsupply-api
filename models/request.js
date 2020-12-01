@@ -6,7 +6,6 @@ const requestSchema = mongoose.Schema({
     type: String,
     date: Date,
     dateLastUpdate: Date,
-    matricula: String,
     supplierName: String,
     supplierID: String,
     requesterName: String,
