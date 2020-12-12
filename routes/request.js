@@ -6,7 +6,8 @@ const multerConfig = require('../config/multer')
 const uploadMiddleware = multer(multerConfig).array('file');
 
 router.post("/create", uploadMiddleware, controller.createRequest)
-router.get("/list", controller.getRequests)
+router.get("/list", controller.listRequests)
+router.get("/:requestID", controller.getRequest)
 
 
 module.exports = router

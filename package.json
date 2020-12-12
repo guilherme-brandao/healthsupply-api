@@ -33,5 +33,8 @@
   "bugs": {
     "url": "https://github.com/guilherme-brandao/healthsupply-api/issues"
   },
-  "homepage": "https://github.com/guilherme-brandao/healthsupply-api#readme"
+  "homepage": "https://github.com/guilherme-brandao/healthsupply-api#readme",
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  }
 }

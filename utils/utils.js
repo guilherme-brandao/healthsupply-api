@@ -3,7 +3,7 @@ const File = require("../models/file");
 class Uteis {
 
     static generateId() {
-        const random = Math.floor(Math.random() * 1000000000);
+        const random = Math.floor(Math.random() * 10000);
         const timestamp = Date.now();
         return JSON.stringify(random) + JSON.stringify(timestamp);
     }

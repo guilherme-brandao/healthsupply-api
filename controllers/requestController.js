@@ -41,7 +41,27 @@ exports.createRequest = async (req, res, next) => {
 
 }
 
-exports.getRequests = async (req, res, next) => {
+exports.getRequest = async (req, res, next) => {
+    let selector = {}
+    let query = selector
+
+    selector.requestID = req.params.requestID
+    Request.find(query)
+        .exec()
+        .then(s => {
+            if (s) {
+                res.status(200).json(s)
+            } else {
+                res.status(404).json({ message: "No data found!" })
+            }
+
+        })
+        .catch(err => {
+            res.status(500).json({ error: err })
+        })
+}
+
+exports.listRequests = async (req, res, next) => {
     let selector = {}
     let query = selector
 
