@@ -3,9 +3,9 @@ const File = require("../models/file");
 class Uteis {
 
     static generateId() {
-        const random = Math.floor(Math.random() * 10000);
+        const random = Math.floor(Math.random() * 1000000000);
         const timestamp = Date.now();
-        return JSON.stringify(random) + JSON.stringify(timestamp);
+        return random + timestamp;
     }
 
     // Include the files in DB and in the request

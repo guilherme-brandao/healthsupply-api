@@ -5,9 +5,8 @@ const Request = require('../models/request');
 exports.createRequest = async (req, res, next) => {
 
     var attachments = req.files;
-    var request = JSON.parse(req.body.request);
-    console.log(request)
-    console.log(typeof request)
+    var requestJSON = JSON.parse(req.body.request);
+    console.log("Request Arrived: ", requestJSON)
 
     if (attachments && attachments.length > 0) {
         let requestWithAttachments = await Utils.handleAttachments(request, attachments);
