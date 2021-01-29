@@ -1,10 +1,35 @@
-version: "3"
+version: "2.8"
 
 services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminpw
+      MONGO_INITDB_DATABASE: healthsupply
+    ports:
+      - 27017:27017
   app:
     build: .
     command: npm start
+    env_file: .env
     ports:
       - "3030:3030"
     volumes:
       - .:/healthsupply
+    environment:
+      - PORT=3030
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - MONGO_HOSTNAME=mongodb
+      - MONGO_PORT=$MONGO_PORT
+      - MONGO_DB=$MONGO_DB
+      - AUTH_SECRET=$AUTH_SECRET
+      - STORAGE_TYPE=$STORAGE_TYPE
+      - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+      - AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+      - BUCKET_NAME=$BUCKET_NAME
+    depends_on:
+      - mongodb

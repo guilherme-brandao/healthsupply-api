@@ -9,7 +9,15 @@ const authRouter = require('./routes/auth');
 const requestRouter = require('./routes/request');
 const checkAuth = require('./middleware/check-auth');
 
-mongoose.connect(process.env.MONGO_URL, {
+const {
+  MONGO_USERNAME,
+  MONGO_PASSWORD,
+  MONGO_HOSTNAME,
+  MONGO_PORT,
+  MONGO_DB
+} = process.env;
+
+mongoose.connect(`mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
