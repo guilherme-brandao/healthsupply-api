@@ -1,0 +1,23 @@
+{
+    "codigo": "0",
+    "retorno": {
+        "attachments": [],
+        "itens": [
+            {
+                "item": 1
+            }
+        ],
+        "_id": "602333fcac61d66fa09f89bb",
+        "requestID": 1613432264789,
+        "type": "REQUEST",
+        "date": "2021-02-10T01:16:44.909Z",
+        "dateLastUpdate": "2021-02-10T01:16:44.909Z",
+        "supplierName": "testB",
+        "supplierID": "AB123",
+        "requesterName": "test",
+        "requesterID": "BA321",
+        "description": "Request test",
+        "status": "PENDING",
+        "__v": 0
+    }
+}
