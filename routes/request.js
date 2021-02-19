@@ -8,6 +8,7 @@ const uploadMiddleware = multer(multerConfig).array('file');
 router.post("/create", uploadMiddleware, controller.createRequest)
 router.get("/list", controller.listRequests)
 router.get("/:requestID", controller.getRequest)
+router.get("/requester/:requestID", controller.getRequester)
 
 
 module.exports = router

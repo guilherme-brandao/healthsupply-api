@@ -1,4 +1,5 @@
 const https = require('https')
+
 class Service {
     async makeRequest(url) {
         return new Promise((resolve, reject) => {
@@ -7,6 +8,15 @@ class Service {
                 response.on("error", reject)
             })
         })
+    }
+
+    async getRequester(url) {
+        const { retorno } = await this.makeRequest(url)
+        
+        return {
+            name: retorno.requesterName,
+            id: retorno.requesterID
+        }
     }
 }
 

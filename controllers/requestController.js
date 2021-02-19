@@ -41,15 +41,14 @@ exports.createRequest = async (req, res, next) => {
 }
 
 exports.getRequest = async (req, res, next) => {
-    let selector = {}
-    let query = selector
+    let query = { selector }
 
     selector.requestID = req.params.requestID
     Request.find(query)
         .exec()
-        .then(s => {
-            if (s) {
-                res.status(200).json(s)
+        .then(resp => {
+            if (resp) {
+                res.status(200).json(resp)
             } else {
                 res.status(404).json({ message: "No data found!" })
             }
@@ -61,16 +60,39 @@ exports.getRequest = async (req, res, next) => {
 }
 
 exports.listRequests = async (req, res, next) => {
-    let selector = {}
-    let query = selector
+    let query = { selector }
 
     selector.type = "REQUEST"
 
     Request.find(query).sort({ $natural: -1 })
         .exec()
-        .then(s => {
-            if (s) {
-                res.status(200).json(s)
+        .then(resp => {
+            if (resp) {
+                res.status(200).json(resp)
+            } else {
+                res.status(404).json({ message: "No data found!" })
+            }
+
+        })
+        .catch(err => {
+            res.status(500).json({ error: err })
+        })
+}
+
+exports.getRequester = async (req, res, next) => {
+    let query = { selector }
+
+    selector.requestID = req.params.requestID
+    Request.find(query)
+        .exec()
+        .then(resp => {
+            if (resp) {
+                const requester = {
+                    name: requesterName,
+                    id: requesterID
+                }
+                
+                res.status(200).json(requester)
             } else {
                 res.status(404).json({ message: "No data found!" })
             }
